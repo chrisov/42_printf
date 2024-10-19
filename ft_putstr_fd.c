@@ -6,11 +6,11 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:51:10 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 13:55:42 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:28:16 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

@@ -6,11 +6,11 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:03:59 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 13:56:28 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:27:52 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *str)
 {

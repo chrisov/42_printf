@@ -6,12 +6,11 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:01:58 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 15:55:01 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:28:09 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
 static int	ft_div(unsigned int num)
 {
@@ -46,10 +45,3 @@ void	ft_putunbr_fd(int n, int fd)
 		div /= 10;
 	}
 }
-// int	main(void)
-// {
-// 	printf("custom casting: ");
-// 	ft_putunbr_fd(-42, 1);
-// 	printf("\noriginal casting: \"%u\'\n", -42);
-// 	return (0);
-// }

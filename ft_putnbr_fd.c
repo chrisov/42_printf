@@ -6,11 +6,11 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:45:20 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 15:50:02 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:28:28 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_div(int num)
 {
