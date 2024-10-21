@@ -6,15 +6,12 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 16:35:58 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:42:27 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/**
- * Not handling errors
- */
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
