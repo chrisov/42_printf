@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putxnbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/21 11:37:12 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:48:33 by dimitris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void	ft_rev_str(char *str, int i)
 	}
 }
 
-int	ft_putxnbr_fd(unsigned int n, int fd)
+int	ft_putxnbr_fd(unsigned long n, int fd)
 {
 	char	*hex_digits;
-	char	hex_str[20];
-	int		remainder;
-	int		count;
+	char	hex_str[20];			//  <--- this needs changing into
+	int		remainder;				//a pointer so the hex value should
+	int		count;					//be calculated sooner
 
 	hex_digits = "0123456789abcdef";
 	count = 0;
@@ -52,3 +52,10 @@ int	ft_putxnbr_fd(unsigned int n, int fd)
 	ft_putstr_fd(hex_str, fd);
 	return (count);
 }
+
+// int	main(void)
+// {
+// 	int	l = INT_MIN;
+// 	ft_putxnbr_fd(l, 1);
+// 	return (0);
+// }
