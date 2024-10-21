@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/19 16:42:27 by dchrysov         ###   ########.fr       */
+=======
+/*   Updated: 2024/10/20 18:42:47 by dimitris         ###   ########.fr       */
+>>>>>>> 2e9412d1fe800a9f238df6ae73bbe87334682d5a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +19,44 @@
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
+	int		count;
 
+	count = 0;
 	va_start(args, str);
 	while (*str)
 	{
-		if (*str == '%')
+		if (*str == '%' && *(str + 1))
 		{
-			if (*(str + 1) == 'c' || *(str + 1) == '%')
-				ft_putchar_fd((char)va_arg(args, int), 1);
-			if (*(str + 1) == 'i' || *(str + 1) == 'd' )
-				ft_putnbr_fd(va_arg(args, int), 1);
-			if (*(str + 1) == 's')
-				ft_putstr_fd((char *)va_arg(args, int *), 1);
-			if (*(str + 1) == 'u')
-				ft_putunbr_fd(va_arg(args, int), 1);
 			str ++;
+			if (*str == 'c' || *str == '%')
+				count += ft_putchar_fd((char)va_arg(args, int), 1);
+			if (*str == 'i' || *str == 'd' )
+				count += ft_putnbr_fd(va_arg(args, int), 1);
+			if (*str == 's')
+				count += ft_putstr_fd((char *)va_arg(args, int *), 1);
+			if (*str == 'u')
+				count += ft_putunbr_fd(va_arg(args, int), 1);
+			if (*str == 'x')
+				count += ft_putxnbr_fd(va_arg(args, int), 1);
 		}
 		else
-			write(STDOUT_FILENO, &(*str), 1);
+			count += ft_putchar_fd(*str, 1);
 		str++;
 	}
 	va_end(args);
-	return (0);
+	return (count);
 }
 
 // #include <stdio.h>
 // int	main(void)
 // {
-// 	char	*str = "Hello World";
-// 	char	c = 'D';
-// 	char	prc = '%';
-// 	int		n = -42;
-
-// 	ft_printf("\nMy char is \"%c\" ...!\n", c);
-// 	ft_printf("My percentage sign is \"%c\" ...!\n", prc);
-// 	ft_printf("My phrase is \"%s\" ...!\n", str);
-// 	ft_printf("My integer is \"%i\" ...!\n", n);
-// 	ft_printf("My double is \"%d\" ...!\n", n);
-// 	ft_printf("My unsigned int is \"%u\" ...!\n", n);
-// 	printf("\nCheck unsigned: \"%u\"\n\n", n);
+// 		// char	*str = "Hello World";
+// 		// char	c = 'E';
+// 		// char	prc = '%';
+// 		int		n = 42;
+// 		// int		count;
+//
+// 	ft_printf("\nft_printf: %x\n", n);
+// 	printf("count: %i\n", printf("printf: %x\n\n", n));
 // 	return (0);
 // }

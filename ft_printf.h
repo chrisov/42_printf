@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:57:23 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/19 16:33:43 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:35:35 by dimitris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 
 size_t	ft_strlen(const char *str);
 int		ft_printf(const char *str, ...);
-void	ft_putunbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putchar_fd(char c, int fd);
+int		ft_putunbr_fd(int n, int fd);
+int		ft_putxnbr_fd(int n, int fd);
+int		ft_putstr_fd(char *s, int fd);
+int		ft_putnbr_fd(int n, int fd);
+int		ft_putchar_fd(char c, int fd);
 
 #endif
