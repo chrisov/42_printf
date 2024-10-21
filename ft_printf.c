@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/21 16:43:12 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:45:24 by dimitris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_printf(const char *str, ...)
 			if (*str == 'u')
 				count += ft_putunbr_fd(va_arg(args, int), 1);
 			if (*str == 'x')
-				count += ft_putxnbr_fd(va_arg(args, unsigned int), 1);
+				count += ft_putxnbr_fd(va_arg(args, unsigned long), 1);
 			if (*str == 'X')
 				count += ft_putxxnbr_fd(va_arg(args, unsigned int), 1);
 			if (*str == 'p')
