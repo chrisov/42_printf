@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putxnbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/20 18:43:57 by dimitris         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:37:12 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	ft_rev_str(char *str, int i)
 	while (j < i / 2)
 	{
 		temp = *(str + j);
-		*(str + j) = *(str + j + i -1);
-		*(str + j + i - 1) = temp;
+		*(str + j) = *(str + i - j -1);
+		*(str + i - j - 1) = temp;
 		j++;
 	}
 }
 
-int	ft_putxnbr_fd(int n, int fd)
+int	ft_putxnbr_fd(unsigned int n, int fd)
 {
 	char	*hex_digits;
 	char	hex_str[20];
@@ -40,7 +40,7 @@ int	ft_putxnbr_fd(int n, int fd)
 		hex_str[count++] = '0';
 	else
 	{
-		while (n != 0)
+		while (n > 0)
 		{
 			remainder = n % 16;
 			hex_str[count++] = hex_digits[remainder];
@@ -52,16 +52,3 @@ int	ft_putxnbr_fd(int n, int fd)
 	ft_putstr_fd(hex_str, fd);
 	return (count);
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	int 	n = 42;
-// 	// char	hex[20];
-// 	int		count;
-
-// 	count = ft_putxnbr_fd(n, 1);
-// 	printf("\ncustom: (count: %i)\n", count);
-// 	printf("original: %x\n\n", n);
-// 	return (0);
-// }
