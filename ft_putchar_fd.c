@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:41:10 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/21 14:23:36 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:38:27 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	write (fd, &c, 1);
+	int	res;
+
+	res = write (fd, &c, 1);
+	if (res == -1)
+		return (-1);
 	return (1);
 }
