@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 14:54:19 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:48:16 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,3 @@ int	ft_putptr_fd(void	*ptr, int fd)
 	count = ft_putlxnbr_fd((unsigned long)ptr, hex_str, fd);
 	return (count);
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	int		l = -42;
-// 	int		count;
-// 	void		*ptr;
-// 	ptr = &l;
-// 	count = printf("\n%p\n", ptr);
-// 	printf("%d\n", count);
-// 	count = ft_putptr_fd(ptr, 1);
-// 	printf("\n%d\n", count);
-// 	// count = ft_putptr_fd(ptr, 1);
-// 	// printf("\tcount= %d\noriginal: ", count);
-// 	// printf("\tcount= %d\n\n", count);
-// 	return (0);
-// }
