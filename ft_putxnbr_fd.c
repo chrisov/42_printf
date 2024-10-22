@@ -6,13 +6,26 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/21 11:37:12 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:37:12 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_rev_str(char *str, int i)
+static int	ft_alloc(unsigned long n)
+{
+	int	count;
+
+	count = 0;
+	while (n > 0)
+	{
+		count++;
+		n /= 16;
+	}
+	return (count);
+}
+
+static void	ft_rev_str(char *str, int i, int fd)
 {
 	int		j;
 	char	temp;
@@ -21,20 +34,24 @@ static void	ft_rev_str(char *str, int i)
 	while (j < i / 2)
 	{
 		temp = *(str + j);
-		*(str + j) = *(str + i - j -1);
+		*(str + j) = *(str + i - j - 1);
 		*(str + i - j - 1) = temp;
 		j++;
 	}
+	ft_putstr_fd(str, fd);
 }
 
 int	ft_putxnbr_fd(unsigned int n, int fd)
 {
 	char	*hex_digits;
-	char	hex_str[20];
+	char	*hex_str;
 	int		remainder;
 	int		count;
 
 	hex_digits = "0123456789abcdef";
+	hex_str = malloc(ft_alloc(n) + 2);
+	if (hex_str == NULL)
+		return (0);
 	count = 0;
 	if (n == 0)
 		hex_str[count++] = '0';
@@ -48,7 +65,16 @@ int	ft_putxnbr_fd(unsigned int n, int fd)
 		}
 	}
 	hex_str[count] = '\0';
-	ft_rev_str(hex_str, count);
-	ft_putstr_fd(hex_str, fd);
+	ft_rev_str(hex_str, count, fd);
+	free(hex_str);
 	return (count);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	unsigned int	l = INT_MAX;
+// 	ft_putxnbr_fd(l, 1);
+// 	printf("\n%x\n", l);
+// 	return (0);
+// }
