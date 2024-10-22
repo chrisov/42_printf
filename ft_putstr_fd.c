@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:51:10 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 16:53:25 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:33:33 by dimitris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_putstr_fd(char *s, int fd)
 	count = 0;
 	if (s == NULL)
 	{
-		write(fd, "NULL", 4);						// <-------
+		write(fd, "(null)", 6);
 		return (6);
 	}
 	while (i < ft_strlen(s) && count != -1)
@@ -29,5 +29,5 @@ int	ft_putstr_fd(char *s, int fd)
 		count += ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	return (count);
+	return (ft_strlen(s));
 }

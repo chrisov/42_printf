@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putptr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 15:48:16 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:05:59 by dimitris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_rev_str(char *str, int i, int fd)
 
 static char	*ft_alloc(char *str, unsigned long n)
 {
-	str = malloc(ft_mem_size(n) + 3);
+	str = malloc(ft_mem_size(n) + 4);
 	if (str == NULL)
 		return (NULL);
 	return (str);
@@ -56,10 +56,12 @@ static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
 	int		count;
 
 	hex_digits = "0123456789abcdef";
-	str = ft_alloc(str, n);
 	count = 0;
 	if (n == 0)
-		str[count++] = '0';
+	{
+		write(fd, "(nil)", 5);
+		return (5);
+	}
 	else
 	{
 		while (n > 0)
@@ -72,8 +74,7 @@ static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
 	str[count++] = 'x';
 	str[count++] = '0';
 	str[count] = '\0';
-	ft_rev_str(str, count, fd);
-	free(str);
+	ft_rev_str(str, ft_strlen(str), fd);
 	return (count);
 }
 
@@ -83,11 +84,8 @@ int	ft_putptr_fd(void	*ptr, int fd)
 	int				count;
 
 	hex_str = NULL;
-	if (ptr == NULL)
-	{
-		ft_putstr_fd("0x0", fd);
-		return (3);
-	}
+	hex_str = ft_alloc(hex_str, (unsigned long)ptr);
 	count = ft_putlxnbr_fd((unsigned long)ptr, hex_str, fd);
+	free(hex_str);
 	return (count);
 }
