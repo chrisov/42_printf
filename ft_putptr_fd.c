@@ -6,65 +6,103 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:14:55 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:54:19 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
+static int	ft_mem_size(unsigned long n)
+{
+	int	count;
+
+	count = 0;
+	while (n > 0)
+	{
+		count++;
+		n /= 16;
+	}
+	return (count);
+}
+
+static void	ft_rev_str(char *str, int i, int fd)
+{
+	int		j;
+	char	temp;
+
+	j = 0;
+	while (j < i / 2)
+	{
+		temp = *(str + j);
+		*(str + j) = *(str + i - j - 1);
+		*(str + i - j - 1) = temp;
+		j++;
+	}
+	ft_putstr_fd(str, fd);
+}
+
+static char	*ft_alloc(char *str, unsigned long n)
+{
+	str = malloc(ft_mem_size(n) + 3);
+	if (str == NULL)
+		return (NULL);
+	return (str);
+}
+
+static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
+{
+	char	*hex_digits;
+	int		remainder;
+	int		count;
+
+	hex_digits = "0123456789abcdef";
+	str = ft_alloc(str, n);
+	count = 0;
+	if (n == 0)
+		str[count++] = '0';
+	else
+	{
+		while (n > 0)
+		{
+			remainder = n % 16;
+			str[count++] = hex_digits[remainder];
+			n /= 16;
+		}
+	}
+	str[count++] = 'x';
+	str[count++] = '0';
+	str[count] = '\0';
+	ft_rev_str(str, count, fd);
+	free(str);
+	return (count);
+}
 
 int	ft_putptr_fd(void	*ptr, int fd)
 {
-	unsigned long	address;
-	char			*hex_digits;
-	char			*str;
-	int				i;
+	char			*hex_str;
 	int				count;
 
-	i = 0;
-	count = 0;
-	address = (unsigned long)ptr;
-	hex_digits = "0123456789abcdef";
+	hex_str = NULL;
 	if (ptr == NULL)
 	{
 		ft_putstr_fd("0x0", fd);
 		return (3);
 	}
-	i = 2 * sizeof(address) - 2;
-	str = malloc(i);
-	if (str == NULL)
-		return (0);
-	str[0] = '0';
-	str[1] = 'x';
-	str[i] = '\0';
-	count = 2;
-	while (i > 2)
-	{
-		str[--i] = hex_digits[address % 16];
-		address /= 16;
-		count++;
-	}
-	ft_putstr_fd(str, fd);
-	free(str);
-	return (count + 2);
+	count = ft_putlxnbr_fd((unsigned long)ptr, hex_str, fd);
+	return (count);
 }
 
-
+// #include <stdio.h>
 // int	main(void)
 // {
 // 	int		l = -42;
-// 	// int		count;
+// 	int		count;
 // 	void		*ptr;
-// 	unsigned int	address;
-
 // 	ptr = &l;
-// 	address = (unsigned long)ptr;
-// 	printf("\nptr:%p\n", ptr);
-// 	printf("%u\n", address);
-// 	ft_putxnbr_fd(address, 1);
+// 	count = printf("\n%p\n", ptr);
+// 	printf("%d\n", count);
+// 	count = ft_putptr_fd(ptr, 1);
+// 	printf("\n%d\n", count);
 // 	// count = ft_putptr_fd(ptr, 1);
 // 	// printf("\tcount= %d\noriginal: ", count);
 // 	// printf("\tcount= %d\n\n", count);
