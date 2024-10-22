@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 13:37:12 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:46:43 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,3 @@ int	ft_putxnbr_fd(unsigned int n, int fd)
 	free(hex_str);
 	return (count);
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	unsigned int	l = INT_MAX;
-// 	ft_putxnbr_fd(l, 1);
-// 	printf("\n%x\n", l);
-// 	return (0);
-// }
