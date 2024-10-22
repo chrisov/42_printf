@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 16:11:04 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:37:19 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static int	ft_ifcase(char *s, va_list args)
 	count = 0;
 	if (*s == 'c')
 		count += ft_putchar_fd((char)va_arg(args, int), 1);
-	if (*s == 's')
+	else if (*s == 's')
 		count += ft_putstr_fd((char *)va_arg(args, int *), 1);
-	if (*s == 'i' || *s == 'd' )
+	else if (*s == 'i' || *s == 'd' )
 		count += ft_putnbr_fd(va_arg(args, int), 1);
-	if (*s == 'u')
+	else if (*s == 'u')
 		count += ft_putunbr_fd(va_arg(args, int), 1);
-	if (*s == 'x')
+	else if (*s == 'x')
 		count += ft_putxnbr_fd(va_arg(args, unsigned long), 1);
-	if (*s == 'X')
+	else if (*s == 'X')
 		count += ft_putxxnbr_fd(va_arg(args, unsigned int), 1);
-	if (*s == 'p')
+	else if (*s == 'p')
 		count += ft_putptr_fd(va_arg(args, void *), 1);
-	if (*s == '%')
+	else if (*s == '%')
 		count += ft_putchar_fd('%', 1);
 	return (count);
 }
@@ -43,7 +43,7 @@ int	ft_printf(const char *str, ...)
 
 	count = 0;
 	va_start(args, str);
-	while (*str)
+	while (*str && count != -1)
 	{
 		if (*str == '%')
 		{
@@ -62,11 +62,10 @@ int	ft_printf(const char *str, ...)
 // int	main(void)
 // {
 // 	int count;
-// 	char	c = '%';
-//
-// 	count = printf(" %c ", c);
+
+// 	count = printf("\"\001\"\002\"\007\"\v\"\010\"\f\"\r\"\n\"");
 // 	printf("%d\n", count);
-// 	count =	ft_printf(" %c ", c);
+// 	count =	ft_printf("\"\001\"\002\"\007\"\v\"\010\"\f\"\r\"\n\"");
 // 	printf("%d\n", count);
 // 	return (0);
 // }
