@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:51:10 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/23 12:01:58 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:20:08 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_putstr_fd(char *s, int fd)
 	count = 0;
 	if (s == NULL)
 	{
-		count = write(fd, "(null)", 6);
+		count += write(fd, "(null)", 6);
 		return (count);
 	}
 	while (i < ft_strlen(s))
