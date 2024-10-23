@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 21:07:52 by dimitris         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:56:58 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_ifcase(char *s, va_list args)
 	if (*s == 'c')
 		count += ft_putchar_fd((char)va_arg(args, int), 1);
 	if (*s == 's')
-		count += ft_putstr_fd((char *)va_arg(args, int *), 1);
+		count += ft_putstr_fd((char *)va_arg(args, char *), 1);
 	if (*s == 'i' || *s == 'd' )
 		count += ft_putnbr_fd(va_arg(args, int), 1);
 	if (*s == 'u')
