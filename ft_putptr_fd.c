@@ -6,86 +6,32 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/23 11:42:42 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:37:58 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_mem_size(unsigned long n)
-{
-	int	count;
-
-	count = 0;
-	while (n > 0)
-	{
-		count++;
-		n /= 16;
-	}
-	return (count);
-}
-
-static void	ft_rev_str(char *str, int i, int fd)
-{
-	int		j;
-	char	temp;
-
-	j = 0;
-	while (j < i / 2)
-	{
-		temp = *(str + j);
-		*(str + j) = *(str + i - j - 1);
-		*(str + i - j - 1) = temp;
-		j++;
-	}
-	ft_putstr_fd(str, fd);
-}
-
-static char	*ft_alloc(char *str, unsigned long n)
-{
-	str = malloc(ft_mem_size(n) + 4);
-	if (str == NULL)
-		return (NULL);
-	return (str);
-}
-
-static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
-{
-	char	*hex_digits;
-	int		remainder;
-	int		count;
-
-	hex_digits = "0123456789abcdef";
-	count = 0;
-	if (n == 0)
-	{
-		write(fd, "0x0", 3);
-		return (3);
-	}
-	else
-	{
-		while (n > 0)
-		{
-			remainder = n % 16;
-			str[count++] = hex_digits[remainder];
-			n /= 16;
-		}
-	}
-	str[count++] = 'x';
-	str[count++] = '0';
-	str[count] = '\0';
-	ft_rev_str(str, ft_strlen(str), fd);
-	return (count);
-}
-
 int	ft_putptr_fd(void	*ptr, int fd)
 {
-	char			*hex_str;
-	int				count;
+	unsigned long	n;
+	unsigned long	remainder;
+	unsigned long	count;
+	char			*hex_digits;
 
-	hex_str = NULL;
-	hex_str = ft_alloc(hex_str, (unsigned long)ptr);
-	count = ft_putlxnbr_fd((unsigned long)ptr, hex_str, fd);
-	free(hex_str);
-	return (count);
+	count = 0;
+	n = (unsigned long)ptr;
+	remainder = 1;
+	hex_digits = "0123456789abcdef";
+	if (write(fd, "0x", 2) == -1)
+		return (-1);
+	count += 2;
+	while (n / remainder >= 16)
+		remainder *= 16;
+	while (remainder != 0)
+	{
+		count += write(fd, &hex_digits[(n / remainder) % 16], 1);
+		remainder /= 16;
+	}
+	return ((int)count);
 }
