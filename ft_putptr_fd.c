@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putptr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitris <dimitris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 21:05:59 by dimitris         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:42:42 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
 	count = 0;
 	if (n == 0)
 	{
-		write(fd, "(nil)", 5);
-		return (5);
+		write(fd, "0x0", 3);
+		return (3);
 	}
 	else
 	{
