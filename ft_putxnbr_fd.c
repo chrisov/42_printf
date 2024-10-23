@@ -6,66 +6,29 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:44:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/22 13:46:43 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:47:33 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_alloc(unsigned long n)
-{
-	int	count;
-
-	count = 0;
-	while (n > 0)
-	{
-		count++;
-		n /= 16;
-	}
-	return (count);
-}
-
-static void	ft_rev_str(char *str, int i, int fd)
-{
-	int		j;
-	char	temp;
-
-	j = 0;
-	while (j < i / 2)
-	{
-		temp = *(str + j);
-		*(str + j) = *(str + i - j - 1);
-		*(str + i - j - 1) = temp;
-		j++;
-	}
-	ft_putstr_fd(str, fd);
-}
-
 int	ft_putxnbr_fd(unsigned int n, int fd)
 {
-	char	*hex_digits;
-	char	*hex_str;
-	int		remainder;
-	int		count;
+	unsigned long	remainder;
+	char			*hex_digits;
+	int				count;
 
-	hex_digits = "0123456789abcdef";
-	hex_str = malloc(ft_alloc(n) + 2);
-	if (hex_str == NULL)
-		return (0);
 	count = 0;
-	if (n == 0)
-		hex_str[count++] = '0';
-	else
+	remainder = 1;
+	hex_digits = "0123456789abcdef";
+	while (n / remainder >= 16)
+		remainder *= 16;
+	while (remainder != 0)
 	{
-		while (n > 0)
-		{
-			remainder = n % 16;
-			hex_str[count++] = hex_digits[remainder];
-			n /= 16;
-		}
+		count += write(fd, &hex_digits[(n / remainder) % 16], 1);
+		if (count == -1)
+			return (count);
+		remainder /= 16;
 	}
-	hex_str[count] = '\0';
-	ft_rev_str(hex_str, count, fd);
-	free(hex_str);
 	return (count);
 }
