@@ -6,7 +6,7 @@
 /*   By: dchrysov <dchrysov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:09 by dchrysov          #+#    #+#             */
-/*   Updated: 2024/10/23 14:37:58 by dchrysov         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:08:38 by dchrysov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_putptr_fd(void	*ptr, int fd)
 {
 	unsigned long	n;
 	unsigned long	remainder;
-	unsigned long	count;
 	char			*hex_digits;
+	int				count;
 
 	count = 0;
 	n = (unsigned long)ptr;
@@ -33,5 +33,5 @@ int	ft_putptr_fd(void	*ptr, int fd)
 		count += write(fd, &hex_digits[(n / remainder) % 16], 1);
 		remainder /= 16;
 	}
-	return ((int)count);
+	return (count);
 }
