@@ -1,17 +1,18 @@
 
 CC = cc
+
 CFLAGS = -Wall -Werror -Wextra
-
-SRCS = ft_putunbr_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c\
-	ft_strlen.c ft_printf.c ft_putxnbr_fd.c ft_putxxnbr_fd.c ft_putptr_fd.c\
-
-OBJS = $(SRCS:.c=.o)
 
 NAME = libftprintf.a
 
+SRCS =  ft_printf.c ft_putunbr_fd.c ft_putxxnbr_fd.c ft_putxnbr_fd.c ft_putstr_fd.c\
+		ft_putnbr_fd.c ft_putchar_fd.c ft_putptr_fd.c ft_strlen_fd.c
+
+OBJS = $(SRCS:.c=.o)
+
 all: $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
