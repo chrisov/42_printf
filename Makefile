@@ -1,27 +1,50 @@
-
+#
+#
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I$(INCDIR)
+MAKEFLAGS += -s
 
-SRCS = ft_putunbr_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c\
-	ft_strlen.c ft_printf.c ft_putxnbr_fd.c ft_putxxnbr_fd.c ft_putptr_fd.c\
+INCDIR = ./include
+SRCDIR = ./src
+OBJDIR = ./obj
+LIBFTDIR = ./inc/libft
 
-OBJS = $(SRCS:.c=.o)
+SRCS = $(SRCDIR)/ft_printunbr_fd.c $(SRCDIR)/ft_printnbr_fd.c $(SRCDIR)/ft_printchar_fd.c $(SRCDIR)/ft_printstr_fd.c\
+	$(SRCDIR)/ft_printf.c $(SRCDIR)/ft_printxnbr_fd.c $(SRCDIR)/ft_printxxnbr_fd.c $(SRCDIR)/ft_printptr_fd.c\
 
+
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+LIBFT = $(LIBFTDIR)/libft.a
 NAME = libftprintf.a
 
 all: $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJDIR) $(OBJS) $(LIBFT)
+	@echo "\033[33mCompilating $(NAME) static library...\033[0m"
 	ar rcs $(NAME) $(OBJS)
+	@echo "$(NAME) created \033[32msuccessfully\033[0m!"
 
-%.o: %.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean: 
-	rm -f $(OBJS) $(NAME)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-fclean: clean 
+$(LIBFT):
+	@$(MAKE) -C $(LIBFTDIR)
+
+clean:
+	@echo "\033[33mRemoving $(NAME) build...\033[0m"
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
+	@$(MAKE) -C $(LIBFTDIR) clean
+	@echo "$(NAME) build removed \033[32msuccessfully\033[0m!"
+
+fclean: clean
+	@echo "\033[33mRemoving $(NAME)...\033[0m"
 	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFTDIR) fclean
+	@echo "$(NAME) removed \033[32msuccessfully\033[0m!"
 
 re: fclean all
 
