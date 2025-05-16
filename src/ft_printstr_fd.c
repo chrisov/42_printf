@@ -12,6 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Displays a string to the fd.abort
+ * 
+ * @returns The number of the characters displayed.
+ */
 int	ft_printstr_fd(char *s, int fd)
 {
 	size_t	i;

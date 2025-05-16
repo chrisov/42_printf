@@ -12,6 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Displays an unsigned number to the fd.
+ * 
+ * @returns The number of characters displayed (length of the number).
+ */
 int	ft_printunbr_fd(int n, int fd)
 {
 	int				count;

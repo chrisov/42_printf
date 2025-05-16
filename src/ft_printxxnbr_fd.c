@@ -12,7 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
-static int	ft_alloc(unsigned long n)
+/**
+ * @brief Calculates the length of the hex representation of the number passed
+ * as parameter
+ */
+static int	hex_length(unsigned long n)
 {
 	int	count;
 
@@ -25,22 +29,38 @@ static int	ft_alloc(unsigned long n)
 	return (count);
 }
 
-static void	ft_rev_str(char *str, int i, int fd)
+/**
+ * @brief Reverses the string and displays the result.
+ * 
+ * @param str Pointer to the string to be reversed.
+ * @param length Length of the string to be reversed.
+ */
+static void	ft_rev_str(char *str, int length, int fd)
 {
 	int		j;
 	char	temp;
 
 	j = 0;
-	while (j < i / 2)
+	while (j < length / 2)
 	{
 		temp = *(str + j);
-		*(str + j) = *(str + i - j -1);
-		*(str + i - j - 1) = temp;
+		*(str + j) = *(str + length - j -1);
+		*(str + length - j - 1) = temp;
 		j++;
 	}
 	ft_putstr_fd(str, fd);
 }
 
+/**
+ * @brief Converts an unsigned long number to its hex representation and
+ * displays the result.
+ * 
+ * @param n The number to be converted.
+ * @returns The number of the characters displayed (length of the number).
+ * 
+ * @note Last step is to reverse the resulting string since it's stored
+ * from end to start.
+ */
 int	ft_printxxnbr_fd(unsigned int n, int fd)
 {
 	char	*hex_digits;
@@ -49,7 +69,7 @@ int	ft_printxxnbr_fd(unsigned int n, int fd)
 	int		count;
 
 	hex_digits = "0123456789ABCDEF";
-	hex_str = malloc(ft_alloc(n) + 2);
+	hex_str = malloc(hex_length(n) + 2);
 	if (hex_str == NULL)
 		return (0);
 	count = 0;

@@ -12,6 +12,10 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Calculates the length of the hexadecimal representation of the number
+ * passed as parameter. 
+ */
 static int	ft_mem_size(unsigned long n)
 {
 	int	count;
@@ -25,17 +29,23 @@ static int	ft_mem_size(unsigned long n)
 	return (count);
 }
 
-static void	ft_rev_str(char *str, int i, int fd)
+/**
+ * @brief Reverses the string and displays the result.
+ * 
+ * @param str Pointer to the string to be reversed.
+ * @param length Length of the string to be reversed.
+ */
+static void	ft_rev_str(char *str, int length, int fd)
 {
 	int		j;
 	char	temp;
 
 	j = 0;
-	while (j < i / 2)
+	while (j < length / 2)
 	{
 		temp = *(str + j);
-		*(str + j) = *(str + i - j - 1);
-		*(str + i - j - 1) = temp;
+		*(str + j) = *(str + length - j - 1);
+		*(str + length - j - 1) = temp;
 		j++;
 	}
 	ft_putstr_fd(str, fd);
@@ -49,6 +59,17 @@ static char	*ft_alloc(char *str, unsigned long n)
 	return (str);
 }
 
+/**
+ * @brief Converts an unsigned long number to its hex representation and
+ * displays the result.
+ * 
+ * @param n The number to be converted.
+ * @param str Stores the resulting string.
+ * @returns The number of the characters displayed (length of the number).
+ * 
+ * @note Last step is to reverse the resulting string since it's stored
+ * from end to start.
+ */
 static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
 {
 	char	*hex_digits;
@@ -80,8 +101,8 @@ static int	ft_putlxnbr_fd(unsigned long n, char *str, int fd)
 
 int	ft_printptr_fd(void	*ptr, int fd)
 {
-	char			*hex_str;
-	int				count;
+	char	*hex_str;
+	int		count;
 
 	hex_str = NULL;
 	hex_str = ft_alloc(hex_str, (unsigned long)ptr);

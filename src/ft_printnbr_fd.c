@@ -12,6 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Displays the integer passed as the parameter to the fd.
+ * 
+ * @returns The number of the characters displayed (length of the number).
+ */
 int	ft_printnbr_fd(int n, int fd)
 {
 	int	count;

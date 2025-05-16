@@ -12,6 +12,12 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Calls the appropriate variable handling printing function, depending
+ * on the char passed as parameter.
+ * 
+ * @returns The number of the displayed characters.
+ */
 static int	ft_ifcase(char *s, va_list args)
 {
 	int	count;

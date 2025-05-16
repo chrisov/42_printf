@@ -12,6 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
+/**
+ * @brief Displays a single character in the specified fd.abort
+ * 
+ * @returns 1 (number of char displayed) if successfull, -1 otherwise
+ */
 int	ft_printchar_fd(char c, int fd)
 {
 	int	res;
