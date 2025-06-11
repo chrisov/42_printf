@@ -1,9 +1,15 @@
+<div align="center">
+  <img src="https://www.dieter-schwarz-stiftung.de/files/Projects/Project%20logos/Logo_42HN-min.jpg" alt="Logo"/>
+</div>
 
-![Logo](https://www.dieter-schwarz-stiftung.de/files/Projects/Project%20logos/Logo_42HN-min.jpg)
-
+<br>
+<div align="center">
 
 ### 🛠 C (Programming Language)
 
+</div>
+
+<br>
 
 # int ft_printf(const char *, ...)
 
